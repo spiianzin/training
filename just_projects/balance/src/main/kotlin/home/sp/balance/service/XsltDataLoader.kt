@@ -2,10 +2,10 @@ package home.sp.balance.service
 
 import home.sp.balance.entities.BalanceRow
 import home.sp.balance.entities.Expense
+import home.sp.balance.entities.RowType
 import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.ss.usermodel.WorkbookFactory
 import java.io.File
-import java.time.LocalDateTime
 import java.util.*
 import java.util.function.Function
 
@@ -26,12 +26,30 @@ class XsltDataLoader : DataLoader<File, List<Expense>> {
             )
         }
 
+        val list: ArrayList<Expense> = ArrayList()
+        var expense = Expense(null, ArrayList())
         for (i in 2..sheet.lastRowNum) {
-            println(toBalanceRow.apply(sheet.getRow(i)))
+            if (RowType.EXPENDITURE.name.equals(sheet.getRow(i).getCell(TYPE).stringCellValue)) {
+                val balanceRow = toBalanceRow.apply(sheet.getRow(i))
+                if (expense.commonUuid == null) {
+                    expense.commonUuid = balanceRow.uuid
+                    expense.items.add(balanceRow)
+                } else if (expense.commonUuid == balanceRow.uuid) {
+                    expense.items.add(balanceRow)
+                } else {
+                    list.add(expense)
+                    expense = Expense(balanceRow.uuid, ArrayList())
+                    expense.items.add(balanceRow)
+                }
+            }
         }
+
+        println("count: " + list.size)
+        list.forEach { println(it) }
     }
 
     companion object {
+        const val TYPE: Int = 0
         const val UUID1: Int = 1
         const val UUID2: Int = 2
         const val DATE: Int = 3

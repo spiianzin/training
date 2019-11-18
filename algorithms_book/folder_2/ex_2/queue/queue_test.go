@@ -5,7 +5,7 @@ import (
 )
 
 func TestEnqueue(t *testing.T) {
-  q := Queue {0, 0, 0, 10, [10]int{}}
+  q := Queue {0, 0, 0, 5, [5]int{}}
   input := 22
   expected := 22
 
@@ -18,7 +18,7 @@ func TestEnqueue(t *testing.T) {
 }
 
 func TestDenqueue(t *testing.T) {
-  q := Queue {0, 0, 0, 10, [10]int{}}
+  q := Queue {0, 0, 0, 5, [5]int{}}
   expected := 22
 
   q.Enqueue(22)
@@ -30,3 +30,46 @@ func TestDenqueue(t *testing.T) {
     t.Error("\nTest Failed: {} expected, recieved: {}", expected, output)
   }
 }
+
+func TestShouldIncreaseTailIndexWhenAddElement(t *testing.T) {
+  q := Queue {0, 0, 0, 5, [5]int{}}
+  expected := 1
+
+  q.Enqueue(22)
+  output := q.tail
+
+  if output != expected {
+    t.Errorf("\nTest Failed: %d expected, recieved: %d", expected, output)
+  }
+}
+
+func TestShouldRevertTailIndexWhenAddElement(t *testing.T) {
+  q := Queue {0, 0, 0, 5, [5]int{}}
+  expected := 0
+
+  q.Enqueue(22)
+  q.Enqueue(23)
+  q.Enqueue(24)
+  q.Enqueue(25)
+  q.Dequeue()
+  q.Enqueue(26)
+  output := q.tail
+
+  if output != expected {
+    t.Errorf("\nTest Failed: %d expected, recieved: %d", expected, output)
+  }
+}
+
+// func TestShouldRevertTailIndexWhenAddElement2(t *testing.T) {
+//   q := Queue {0, 0, 0, 3, [3]int{}}
+//   expected := 0
+//
+//   q.Enqueue(22)
+//   q.Enqueue(23)
+//   q.Enqueue(24)
+//   output := q.tail
+//
+//   if output != expected {
+//     t.Errorf("\nTest Failed: %d expected, recieved: %d", expected, output)
+//   }
+// }
