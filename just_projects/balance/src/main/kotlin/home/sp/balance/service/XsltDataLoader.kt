@@ -9,8 +9,8 @@ import java.io.File
 import java.util.*
 import java.util.function.Function
 
-class XsltDataLoader : DataLoader<File, List<Expense>> {
-    override fun load(source: File) {
+class XsltDataLoader : DataLoader<File, List<BalanceRow>> {
+    override fun load(source: File) : List<BalanceRow> {
         val workbook = WorkbookFactory.create(source)
         val sheet = workbook.getSheetAt(0)
         sheet.getRow(2).getCell(14)
@@ -26,26 +26,28 @@ class XsltDataLoader : DataLoader<File, List<Expense>> {
             )
         }
 
-        val list: ArrayList<Expense> = ArrayList()
+        val list: ArrayList<BalanceRow> = ArrayList()
         var expense = Expense(null, ArrayList())
         for (i in 2..sheet.lastRowNum) {
             if (RowType.EXPENDITURE.name.equals(sheet.getRow(i).getCell(TYPE).stringCellValue)) {
                 val balanceRow = toBalanceRow.apply(sheet.getRow(i))
+                list.add(balanceRow)
                 if (expense.commonUuid == null) {
                     expense.commonUuid = balanceRow.uuid
-                    expense.items.add(balanceRow)
+                    expense.items?.add(balanceRow)
                 } else if (expense.commonUuid == balanceRow.uuid) {
-                    expense.items.add(balanceRow)
+                    expense.items?.add(balanceRow)
                 } else {
-                    list.add(expense)
+//                    list.add(expense)
                     expense = Expense(balanceRow.uuid, ArrayList())
-                    expense.items.add(balanceRow)
+                    expense.items?.add(balanceRow)
                 }
             }
         }
 
-        println("count: " + list.size)
-        list.forEach { println(it) }
+//        println("count: " + list.size)
+//        list.forEach { println(it) }
+        return list
     }
 
     companion object {
