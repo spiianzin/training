@@ -1,0 +1,13 @@
+
+<ul class="rows">
+  <li *ngFor="let row of rows">
+      <span class="badge">
+        {{row.uuid2 | uppercase }}
+      </span>
+      <div><span>name: </span>{{row.name}}</div>
+      <div><span>category: </span>{{row.category}}</div>
+      <div><span>prise: </span>{{row.prise}}</div>
+      <div><span>date: </span>{{row.date}}</div>
+      <div><span>parent: </span>{{row.uuid}}</div>
+  </li>
+</ul>
