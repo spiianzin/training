@@ -13,7 +13,7 @@ func TestEnqueue(t *testing.T) {
 	output := q.array[0]
 
 	if output != expected {
-		t.Error("\nTest Failed: {} inserted, {} expected, recieved: {}", input, expected, output)
+		t.Errorf("\nTest Failed: %d inserted, %d expected, recieved: %d", input, expected, output)
 	}
 }
 
@@ -27,7 +27,7 @@ func TestDenqueue(t *testing.T) {
 	output := q.Dequeue()
 
 	if output != expected {
-		t.Error("\nTest Failed: {} expected, recieved: {}", expected, output)
+		t.Errorf("\nTest Failed: %d expected, recieved: %d", expected, output)
 	}
 }
 
