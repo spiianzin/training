@@ -55,7 +55,6 @@ class XsltDataLoader : DataLoader<File, List<BalanceRow>> {
         const val UUID1: Int = 1
         const val UUID2: Int = 2
         const val DATE: Int = 3
-        const val SELLER: Int = 13
         const val CATEGORY: Int = 13
         const val NAME: Int = 14
         const val COST: Int = 15
