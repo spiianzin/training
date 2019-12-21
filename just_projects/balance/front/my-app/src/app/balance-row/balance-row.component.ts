@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ROWS } from '../mock-balance-rows'
+import { Row } from '../row'
 
 @Component({
   selector: 'app-balance-row',
@@ -12,6 +13,12 @@ export class BalanceRowComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  selectedRow: Row;
+
+  onSelect(row: Row): void {
+    this.selectedRow = row;
   }
 
 }
