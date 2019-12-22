@@ -24,5 +24,5 @@ export const ROWS: Row[] = [
     prise: 30.36,
     category: "Продукты",
     name: "СЛИВА КГ",
-  }
+  },
 ];

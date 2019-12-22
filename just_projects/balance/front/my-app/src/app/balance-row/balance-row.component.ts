@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ROWS } from '../mock-balance-rows'
 import { Row } from '../row'
+import { RowService } from '../row.service';
 
 @Component({
   selector: 'app-balance-row',
@@ -8,17 +9,18 @@ import { Row } from '../row'
   styleUrls: ['./balance-row.component.css']
 })
 export class BalanceRowComponent implements OnInit {
-  rows = ROWS;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  rows: Row[];
   selectedRow: Row;
 
-  onSelect(row: Row): void {
-    this.selectedRow = row;
+  constructor(private rowService: RowService) { }
+
+  ngOnInit() {
+    this.getRows();
+  }
+
+  getRows(): void {
+    this.rowService.getRows()
+        .subscribe(rows => this.rows = rows);
   }
 
 }

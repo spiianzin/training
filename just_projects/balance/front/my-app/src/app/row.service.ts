@@ -15,4 +15,10 @@ export class RowService {
     this.messageService.add('RowService: fetched rows');
     return of(ROWS);
   }
+
+  getRow(uuid2: string): Observable<Row> {
+    // TODO: send the message _after_ fetching the hero
+    this.messageService.add(`RowService: fetched row uuid2=${uuid2}`);
+    return of(ROWS.find(row => row.uuid2 === uuid2));
+  }
 }

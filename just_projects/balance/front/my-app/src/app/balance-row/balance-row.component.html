@@ -1,26 +1,9 @@
 <h2>My balance</h2>
 <ul class="rows">
-  <li *ngFor="let row of rows" (click)="onSelect(row)">
-    <span class="badge">{{row.uuid2 | uppercase}}</span> {{row.name}}
+  <li *ngFor="let row of rows">
+     <a routerLink="/detail/{{row.uuid2}}">
+       <span class="badge">{{row.uuid2 | uppercase}}</span> {{row.name}}
+     </a>
   </li>
 </ul>
-<div *ngIf="selectedRow">
-  <h2>{{selectedRow.name | uppercase}} Details</h2>
-  <div><span>name: </span>{{selectedRow.name}}</div>
-  <div><span>category: </span>{{selectedRow.category}}</div>
-  <div><span>prise: </span>{{selectedRow.prise}}</div>
-  <div><span>date: </span>{{selectedRow.date}}</div>
-  <div><span>parent: </span>{{selectedRow.uuid}}</div>
-</div>
-<!-- <ul class="rows">
-  <li *ngFor="let row of rows">
-      <span class="badge">
-        {{row.uuid2 | uppercase }}
-      </span>
-      <div><span>name: </span>{{row.name}}</div>
-      <div><span>category: </span>{{row.category}}</div>
-      <div><span>prise: </span>{{row.prise}}</div>
-      <div><span>date: </span>{{row.date}}</div>
-      <div><span>parent: </span>{{row.uuid}}</div>
-  </li>
-</ul> -->
+<!-- <app-row-detail [row]="selectedRow"></app-row-detail> -->

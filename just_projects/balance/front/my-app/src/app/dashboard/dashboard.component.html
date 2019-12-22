@@ -1,6 +1,7 @@
 <h3>Rows</h3>
 <div class="grid grid-pad">
-  <a *ngFor="let row of rows" class="col-1-4">
+  <a *ngFor="let row of rows" class="col-1-4"
+      routerLink="/detail/{{row.uuid2}}">
     <div class="module row">
       <h4>{{row.name}}</h4>
     </div>

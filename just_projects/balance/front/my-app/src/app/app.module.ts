@@ -7,13 +7,15 @@ import { BalanceRowComponent } from './balance-row/balance-row.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MessagesComponent }    from './messages/messages.component';
 import { RowDetailComponent } from './row-detail/row-detail.component';
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     BalanceRowComponent,
     MessagesComponent,
-    RowDetailComponent
+    RowDetailComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
