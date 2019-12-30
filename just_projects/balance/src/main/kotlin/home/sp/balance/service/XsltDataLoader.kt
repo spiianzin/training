@@ -13,7 +13,6 @@ class XsltDataLoader : DataLoader<File, List<BalanceRow>> {
     override fun load(source: File) : List<BalanceRow> {
         val workbook = WorkbookFactory.create(source)
         val sheet = workbook.getSheetAt(0)
-        sheet.getRow(2).getCell(14)
 
         val toBalanceRow : Function<Row, BalanceRow> = Function {
             BalanceRow(
@@ -57,7 +56,7 @@ class XsltDataLoader : DataLoader<File, List<BalanceRow>> {
         const val DATE: Int = 3
         const val CATEGORY: Int = 13
         const val NAME: Int = 14
-        const val COST: Int = 15
+        const val COST: Int = 17
         const val COUNT: Int = 16
         const val TOTAL: Int = 17
     }
